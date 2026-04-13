@@ -149,14 +149,14 @@ function Navbar() {
   }, []);
 
   const nav = t('nav', lang);
-  if (typeof nav !== 'object') throw new Error('nav translation missing');
+  const safeNav = typeof nav === 'object' && nav ? nav : { logo: 'SherpaLabs|tech', about: 'About', mission: 'Mission', build: 'What We Build', values: 'Values', contact: 'Contact', cta: 'Get in Touch' };
 
   const navLinks = [
-    { href: '#about', label: nav.about },
-    { href: '#mission', label: nav.mission },
-    { href: '#build', label: nav.build },
-    { href: '#values', label: nav.values },
-    { href: '#contact', label: nav.contact },
+    { href: '#about', label: safeNav.about },
+    { href: '#mission', label: safeNav.mission },
+    { href: '#build', label: safeNav.build },
+    { href: '#values', label: safeNav.values },
+    { href: '#contact', label: safeNav.contact },
   ];
 
   return (
@@ -164,7 +164,7 @@ function Navbar() {
       <div className="nav-inner">
         <a href="#hero" className="nav-logo">
           <img src="/logo.png" alt="SherpaLabs" className="nav-logo-img" />
-          <GlitchText text={nav.logo} className="nav-logo-text" />
+          <GlitchText text={safeNav.logo} className="nav-logo-text" />
         </a>
 
         {/* Desktop links */}
@@ -172,7 +172,7 @@ function Navbar() {
           {navLinks.map(l => (
             <a key={l.href} href={l.href}>{l.label}</a>
           ))}
-          <a href="#contact" className="nav-cta">{nav.cta}</a>
+          <a href="#contact" className="nav-cta">{safeNav.cta}</a>
 
           {/* Lang switcher */}
           <div className="lang-switcher">
@@ -519,6 +519,7 @@ function ContactSection() {
 function Footer() {
   const { lang } = useLanguage();
   const f = t('footer', lang);
+  const safeF = typeof f === 'object' && f ? f : { brand: 'SherpaLabs|tech', copy: '© {year} SherpaLabs.' };
   const year = new Date().getFullYear();
 
   return (
@@ -526,10 +527,10 @@ function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-brand">
-            <GlitchText text={f.brand} className="footer-brand-glitch" />
+            <GlitchText text={safeF.brand} className="footer-brand-glitch" />
           </div>
           <p className="footer-copy terminal-text">
-            {f.copy.replace('{year}', year)}
+            {(safeF.copy || '© {year} SherpaLabs.').replace('{year}', year)}
           </p>
         </div>
       </div>
