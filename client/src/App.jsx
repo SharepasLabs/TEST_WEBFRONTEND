@@ -14,21 +14,27 @@ function useLanguage() {
 
 function t(key, lang) {
   const keys = key.split('.');
-  // Try selected language
-  let obj = translations[lang];
-  for (const k of keys) {
-    if (obj && obj[k] !== undefined) obj = obj[k];
-    else break;
+
+  // Try selected language first
+  let val = translations[lang];
+  if (val) {
+    for (const k of keys) {
+      if (val && typeof val !== 'string' && val[k] !== undefined) val = val[k];
+      else { val = undefined; break; }
+    }
+    // If we got a string or the root object, return it (for section-level calls)
+    if (val !== undefined && (typeof val === 'string' || typeof val === 'object')) return val;
   }
-  if (typeof obj === 'string') return obj;
 
   // Fallback to English
-  obj = translations.en;
+  val = translations.en;
   for (const k of keys) {
-    if (obj && obj[k] !== undefined) obj = obj[k];
-    else return key;
+    if (val && typeof val !== 'string' && val[k] !== undefined) val = val[k];
+    else { val = undefined; break; }
   }
-  return typeof obj === 'string' ? obj : key;
+
+  if (val !== undefined) return val;
+  return key;
 }
 
 /* ═══════════════════════════════════════════
