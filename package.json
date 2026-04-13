@@ -1,8 +1,8 @@
 {
-  "name": "web-frontend-hello-world",
+  "name": "sherpalabs-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Hello World — React (Vite) + Express",
+  "description": "SherpaLabs.tech — AI Innovation Lab",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "npm run dev --workspace=client",

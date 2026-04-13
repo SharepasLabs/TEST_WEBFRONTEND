@@ -1,6 +1,31 @@
-# Hello World — React (Vite) + Express
+# SherpaLabs — AI Innovation Lab
 
-Minimal full-stack hello world app.
+Production-grade corporate site for [SherpaLabs.tech](https://sherpalabs.tech).
+
+An intelligent, modern web presence for an innovation lab building AI-powered, go-to-market-ready technology stacks and self-sustaining automation systems.
+
+## Tech Stack
+
+- **Frontend:** React 18 + Vite 6
+- **Backend:** Express.js
+- **Styling:** Custom CSS (dark theme, animations, responsive)
+- **Architecture:** Monorepo with npm workspaces
+
+## Quick Start
+
+```bash
+# Install all dependencies (root + workspaces)
+npm install
+
+# Development: Vite dev server :5173 + Express :3001
+npm run dev
+
+# Production build (output → ./dist)
+npm run build
+
+# Serve production build
+npm start
+```
 
 ## Project Structure
 
@@ -11,62 +36,34 @@ WEB_FRONTEND/
 │   ├── vite.config.js
 │   └── src/
 │       ├── main.jsx
-│       ├── App.jsx
-│       └── App.css
+│       ├── App.jsx        # All sections (SPA)
+│       └── App.css        # Dark theme, animations
 ├── server/          # Express backend
 │   └── index.js
-├── dist/            # Production build (generated)
-├── package.json     # Root — workspaces + scripts
-├── .gitignore
+├── dist/            # Production build output
+├── package.json
 └── README.md
 ```
 
-## Prerequisites
+## Sections
 
-- Node.js ≥ 18
-- npm ≥ 9 (workspaces support)
+| Section | Description |
+|---------|-------------|
+| Hero | Bold headline, animated particles, CTA |
+| About | Sherpa Mindset — five core principles |
+| Mission & Vision | Dual-card layout |
+| What We Build | Six capability cards in a 3-column grid |
+| Core Values | Five numbered values |
+| Contact | CTA with email link |
 
-## Quick Start
+## Design
 
-```bash
-# Install all dependencies (root + workspaces)
-npm install
+- Dark background (#0a0a0a) with green/teal accents (#00d68f)
+- Inter typeface, 48px+ hero headlines
+- Scroll-triggered reveal animations
+- Responsive: fluid grid, mobile-first breakpoints
+- Gradient glows, subtle particle field, hover effects
 
-# Development: Vite dev server :5173 + Express :3000 (with hot reload)
-npm run dev
+## License
 
-# Production build (builds React output into ./dist)
-npm run build
-
-# Serve production build (Express serves ./dist as static files)
-npm start
-```
-
-## Deploy via SSH
-
-```bash
-# 1. Build locally
-npm run build
-
-# 2. Sync to remote server
-rsync -avz --exclude=node_modules ./ user@host:/path/to/app/
-
-# 3. On remote server
-ssh user@host
-cd /path/to/app
-npm install --omit=dev
-npm start
-```
-
-Or use a process manager like **pm2** for production:
-
-```bash
-npm install -g pm2
-pm2 start server/index.js --name helloworld
-pm2 save
-pm2 startup
-```
-
-## API
-
-- `GET /api/hello` → `{ "message": "Hello World from Express! 🚀" }`
+Proprietary — SherpaLabs
