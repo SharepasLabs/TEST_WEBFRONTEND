@@ -10,7 +10,7 @@ export const translations = {
       cta: 'Get in Touch',
     },
     hero: {
-      eyebrow: 'Innovation Labs',
+      eyebrow: 'COMMIT 2 PUSH _',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: "We don't build prototypes. We build infrastructure.",
@@ -116,7 +116,7 @@ export const translations = {
       cta: 'Contactez-nous',
     },
     hero: {
-      eyebrow: 'Innovation Labs',
+      eyebrow: 'COMMIT 2 PUSH _',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: 'Nous ne construisons pas de prototypes. Nous construisons de l\'infrastructure.',
@@ -222,7 +222,7 @@ export const translations = {
       cta: 'Entre em contato',
     },
     hero: {
-      eyebrow: 'Innovation Labs',
+      eyebrow: 'COMMIT 2 PUSH _',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: 'Não construímos protótipos. Construímos infraestrutura.',
