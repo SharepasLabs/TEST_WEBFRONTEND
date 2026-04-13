@@ -1,7 +1,40 @@
-import { useEffect, useState, useRef } from 'react';
+import { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import './App.css';
+import { translations, LANGUAGES, LANGUAGE_NAMES } from './i18n/translations';
 
-/* ── Intersection Observer hook for reveal animations ── */
+/* ═══════════════════════════════════════════
+   LANGUAGE CONTEXT
+   ═══════════════════════════════════════════ */
+
+const LanguageContext = createContext({ lang: 'en', setLang: () => {} });
+
+function useLanguage() {
+  return useContext(LanguageContext);
+}
+
+function t(key, lang) {
+  const keys = key.split('.');
+  // Try selected language
+  let obj = translations[lang];
+  for (const k of keys) {
+    if (obj && obj[k] !== undefined) obj = obj[k];
+    else break;
+  }
+  if (typeof obj === 'string') return obj;
+
+  // Fallback to English
+  obj = translations.en;
+  for (const k of keys) {
+    if (obj && obj[k] !== undefined) obj = obj[k];
+    else return key;
+  }
+  return typeof obj === 'string' ? obj : key;
+}
+
+/* ═══════════════════════════════════════════
+   INTERSECTION OBSERVER HOOK
+   ═══════════════════════════════════════════ */
+
 function useReveal() {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -23,7 +56,7 @@ function Reveal({ children, delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? 'visible' : ''}`}
+      className="reveal visible-scan"
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -31,116 +64,238 @@ function Reveal({ children, delay = 0 }) {
   );
 }
 
-/* ── Animated background particles (lightweight) ── */
-function ParticleField() {
+/* ═══════════════════════════════════════════
+   GLITCH TEXT COMPONENT
+   ═══════════════════════════════════════════ */
+
+function GlitchText({ text, className = '' }) {
   return (
-    <div className="particle-field" aria-hidden="true">
-      {Array.from({ length: 30 }).map((_, i) => (
-        <span
-          key={i}
-          className="particle"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            width: `${2 + Math.random() * 3}px`,
-            height: `${2 + Math.random() * 3}px`,
-            animationDelay: `${Math.random() * 6}s`,
-            animationDuration: `${4 + Math.random() * 6}s`,
-          }}
-        />
-      ))}
-    </div>
+    <span className={`glitch-text ${className}`} data-text={text}>
+      {text}
+    </span>
   );
 }
 
-/* ── Navbar ── */
+/* ═══════════════════════════════════════════
+   SCANLINE OVERLAY
+   ═══════════════════════════════════════════ */
+
+function Scanlines() {
+  return <div className="scanlines" aria-hidden="true" />;
+}
+
+/* ═══════════════════════════════════════════
+   NOISE OVERLAY
+   ═══════════════════════════════════════════ */
+
+function Noise() {
+  return <div className="noise" aria-hidden="true" />;
+}
+
+/* ═══════════════════════════════════════════
+   MATRIX RAIN (hero background)
+   ═══════════════════════════════════════════ */
+
+function MatrixRain() {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = (canvas.width = canvas.offsetWidth);
+    let h = (canvas.height = canvas.offsetHeight);
+    const cols = Math.floor(w / 18);
+    const drops = Array(cols).fill(1);
+    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01';
+
+    let raf;
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(0, 255, 70, 0.08)';
+      ctx.font = '14px "JetBrains Mono", monospace';
+
+      for (let i = 0; i < cols; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * 18, drops[i] * 18);
+        if (drops[i] * 18 > h && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+
+    const onResize = () => { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; };
+    window.addEventListener('resize', onResize);
+
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
+  }, []);
+  return <canvas ref={canvasRef} className="matrix-rain" aria-hidden="true" />;
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════ */
+
 function Navbar() {
+  const { lang, setLang } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  const nav = t('nav', lang);
+  if (typeof nav !== 'object') throw new Error('nav translation missing');
+
+  const navLinks = [
+    { href: '#about', label: nav.about },
+    { href: '#mission', label: nav.mission },
+    { href: '#build', label: nav.build },
+    { href: '#values', label: nav.values },
+    { href: '#contact', label: nav.contact },
+  ];
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="nav-inner">
         <a href="#hero" className="nav-logo">
-          <span className="logo-icon">◆</span> Sherpa<span className="accent">Labs</span>
+          <img src="/logo.png" alt="SherpaLabs" className="nav-logo-img" />
+          <GlitchText text={nav.logo} className="nav-logo-text" />
         </a>
+
+        {/* Desktop links */}
         <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#mission">Mission</a>
-          <a href="#build">What We Build</a>
-          <a href="#values">Values</a>
-          <a href="#contact" className="nav-cta">Get in Touch</a>
+          {navLinks.map(l => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          <a href="#contact" className="nav-cta">{nav.cta}</a>
+
+          {/* Lang switcher */}
+          <div className="lang-switcher">
+            {LANGUAGES.map(code => (
+              <button
+                key={code}
+                className={`lang-btn${lang === code ? ' active' : ''}`}
+                onClick={() => setLang(code)}
+              >
+                {LANGUAGE_NAMES[code]}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className={`hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Menu"
+        >
+          <span /><span /><span />
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="mobile-menu visible-scan">
+          {navLinks.map(l => (
+            <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>{l.label}</a>
+          ))}
+          <div className="lang-switcher-mobile">
+            {LANGUAGES.map(code => (
+              <button
+                key={code}
+                className={`lang-btn${lang === code ? ' active' : ''}`}
+                onClick={() => { setLang(code); setMenuOpen(false); }}
+              >
+                {LANGUAGE_NAMES[code]}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
 
-/* ── Hero ── */
+/* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+
 function HeroSection() {
+  const { lang } = useLanguage();
+  const hero = t('hero', lang);
+
   return (
     <section id="hero" className="hero">
-      <ParticleField />
+      <MatrixRain />
       <div className="hero-glow" />
       <div className="hero-content">
         <Reveal>
-          <p className="hero-eyebrow">Innovation Lab</p>
+          <p className="hero-eyebrow">{'> '}{hero.eyebrow}<span className="cursor-blink">_</span></p>
         </Reveal>
         <Reveal delay={150}>
           <h1 className="hero-title">
-            Sherpa<span className="accent">Labs</span>
+            <GlitchText text={hero.title} />
+            <span className="accent">|{hero.titleSuffix}</span>
           </h1>
         </Reveal>
         <Reveal delay={300}>
-          <p className="hero-tagline">
-            Building AI-powered innovation infrastructure —<br />
-            intelligent systems that deploy, evolve, and scale.
-          </p>
+          <p className="hero-line terminal-text">{hero.heroLine}</p>
+        </Reveal>
+        <Reveal delay={400}>
+          <p className="hero-tagline">{hero.tagline}</p>
         </Reveal>
         <Reveal delay={500}>
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-primary">Start Building</a>
-            <a href="#about" className="btn btn-outline">Learn More</a>
+            <a href="#contact" className="btn btn-primary">{hero.btnStart}</a>
+            <a href="#about" className="btn btn-outline">{hero.btnLearn}</a>
           </div>
         </Reveal>
       </div>
       <div className="scroll-hint">
         <span className="scroll-line" />
+        <span className="scroll-label">↓ scroll</span>
       </div>
     </section>
   );
 }
 
-/* ── About ── */
+/* ═══════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════ */
+
 function AboutSection() {
-  const points = [
-    'Guide through complexity, not just build solutions',
-    'Combine experience, precision, and execution',
-    'Focus on practical outcomes, not theoretical designs',
-    'Operate with ownership from concept to deployment',
-    'Enable others to reach higher ground faster',
-  ];
+  const { lang } = useLanguage();
+  const about = t('about', lang);
+
+  const points = typeof about.points === 'object' && Array.isArray(about.points)
+    ? about.points
+    : t('about.points', lang).split('\n');
+
   return (
     <section id="about" className="section about">
       <div className="container">
         <Reveal>
-          <h2 className="section-title">Who We Are</h2>
+          <h2 className="section-title terminal-heading">{'// '}{about.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
-          <p className="section-subtitle">
-            We don't just build technology. We guide founders and enterprises through the
-            complexity of turning ideas into production-grade, self-sustaining systems.
-          </p>
+          <p className="section-subtitle">{about.subtitle}</p>
         </Reveal>
         <Reveal delay={200}>
-          <p className="section-body">
-            The <strong>Sherpa Mindset</strong> means we lead with experience, move with
-            precision, and deliver with full ownership — from the first whiteboard session
-            to the final deployment. We exist to help others reach higher ground, faster.
-          </p>
+          <p
+            className="section-body"
+            dangerouslySetInnerHTML={{ __html: about.body }}
+          />
         </Reveal>
         <div className="sherpa-grid">
-          {points.map((p, i) => (
+          {Array.isArray(about.points) && about.points.map((p, i) => (
             <Reveal key={i} delay={300 + i * 80}>
               <div className="sherpa-card">
-                <span className="sherpa-card-icon">◆</span>
+                <span className="sherpa-card-icon">{'>'}</span>
                 <p>{p}</p>
               </div>
             </Reveal>
@@ -151,29 +306,31 @@ function AboutSection() {
   );
 }
 
-/* ── Mission & Vision ── */
+/* ═══════════════════════════════════════════
+   MISSION
+   ═══════════════════════════════════════════ */
+
 function MissionSection() {
+  const { lang } = useLanguage();
+  const m = t('mission', lang);
+
   return (
     <section id="mission" className="section mission">
       <div className="container">
         <div className="mission-grid">
           <Reveal>
-            <div className="mission-card">
-              <h3 className="mission-label">Mission</h3>
+            <div className="mission-card terminal-card">
+              <span className="mission-asciidoc">┌─── MISSION ───┐</span>
               <p className="mission-text">
-                Create intelligent, <span className="accent">production-ready systems</span> that
-                deploy rapidly, generate momentum, and continuously evolve through automation
-                and structured execution.
+                {m.text}
               </p>
             </div>
           </Reveal>
           <Reveal delay={200}>
-            <div className="mission-card">
-              <h3 className="mission-label">Vision</h3>
+            <div className="mission-card terminal-card">
+              <span className="mission-asciidoc">┌─── VISION ───┐</span>
               <p className="mission-text">
-                Become the <span className="accent">infrastructure layer</span> behind modern
-                digital ventures—where AI, automation, and system design converge to create
-                self-sustaining, scalable, and continuously evolving ecosystems.
+                {m.textV}
               </p>
             </div>
           </Reveal>
@@ -183,57 +340,33 @@ function MissionSection() {
   );
 }
 
-/* ── What We Build ── */
+/* ═══════════════════════════════════════════
+   WHAT WE BUILD
+   ═══════════════════════════════════════════ */
+
 function BuildSection() {
-  const capabilities = [
-    {
-      icon: '⚡',
-      title: 'AI-Powered Automation Stacks',
-      desc: 'Custom AI workflows, intelligent pipelines, and autonomous systems that reduce manual overhead and accelerate delivery.',
-    },
-    {
-      icon: '🚀',
-      title: 'Go-To-Market Systems',
-      desc: 'End-to-end technology stacks designed for rapid deployment, real-world traction, and sustained growth velocity.',
-    },
-    {
-      icon: '🧠',
-      title: 'Intelligent Infrastructure',
-      desc: 'Production-grade architecture that scales with your ambition — from first prototype to enterprise-grade deployment.',
-    },
-    {
-      icon: '🔄',
-      title: 'Self-Sustaining Ecosystems',
-      desc: 'Systems that learn, adapt, and improve over time — building momentum through continuous automation and feedback loops.',
-    },
-    {
-      icon: '🎯',
-      title: 'Strategic Execution',
-      desc: 'From concept to launch with full ownership. We don\'t hand off blueprints — we ship working solutions.',
-    },
-    {
-      icon: '🔗',
-      title: 'System Integration',
-      desc: 'Seamlessly connect AI, data, and operational tools into a unified, centrally intelligent platform.',
-    },
-  ];
+  const { lang } = useLanguage();
+  const build = t('build', lang);
+
+  const cards = (typeof build.cards === 'object' && Array.isArray(build.cards))
+    ? build.cards
+    : [];
+
   return (
     <section id="build" className="section build">
       <div className="container">
         <Reveal>
-          <h2 className="section-title">What We Build</h2>
+          <h2 className="section-title terminal-heading">{'// '}{build.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
-          <p className="section-subtitle">
-            Intelligence, automation, and execution — engineered for the real world.
-          </p>
+          <p className="section-subtitle">{build.subtitle}</p>
         </Reveal>
         <div className="build-grid">
-          {capabilities.map((c, i) => (
+          {cards.map((c, i) => (
             <Reveal key={i} delay={150 + i * 80}>
-              <div className="build-card">
+              <div className="build-card terminal-card">
                 <span className="build-card-icon">{c.icon}</span>
-                <h4>{c.title}</h4>
+                <h4>{'$ '}{c.title}</h4>
                 <p>{c.desc}</p>
               </div>
             </Reveal>
@@ -244,32 +377,33 @@ function BuildSection() {
   );
 }
 
-/* ── Core Values ── */
+/* ═══════════════════════════════════════════
+   CORE VALUES
+   ═══════════════════════════════════════════ */
+
 function ValuesSection() {
-  const values = [
-    'Build for real-world execution, not prototypes',
-    'Design systems for scale and continuity',
-    'Prioritize clarity, structure, and precision',
-    'Enable self-sustaining growth through automation',
-    'Maintain centralized intelligence with decentralized execution',
-  ];
+  const { lang } = useLanguage();
+  const v = t('values', lang);
+
+  const items = (typeof v.items === 'object' && Array.isArray(v.items))
+    ? v.items
+    : [];
+
   return (
     <section id="values" className="section values">
       <div className="container">
         <Reveal>
-          <h2 className="section-title">Core Values</h2>
+          <h2 className="section-title terminal-heading">{'// '}{v.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
-          <p className="section-subtitle">
-            The principles that shape every system we design and every solution we ship.
-          </p>
+          <p className="section-subtitle">{v.subtitle}</p>
         </Reveal>
         <div className="values-grid">
-          {values.map((v, i) => (
+          {items.map((item, i) => (
             <Reveal key={i} delay={200 + i * 100}>
-              <div className="value-card" style={{ '--index': i }}>
-                <span className="value-number">0{i + 1}</span>
-                <p>{v}</p>
+              <div className="value-card">
+                <span className="value-number">{String(i + 1).padStart(2, '0')}</span>
+                <p className="terminal-text">{`> ${item}`}</p>
               </div>
             </Reveal>
           ))}
@@ -279,21 +413,98 @@ function ValuesSection() {
   );
 }
 
-/* ── Contact / CTA ── */
+/* ═══════════════════════════════════════════
+   CONTACT (with form)
+   ═══════════════════════════════════════════ */
+
 function ContactSection() {
+  const { lang } = useLanguage();
+  const c = t('contact', lang);
+  const labels = c.labels || {};
+  const placeholders = c.placeholder || {};
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
+
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error('Server error');
+      const data = await res.json();
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      setStatus('error');
+    }
+  }, [name, email, message]);
+
   return (
     <section id="contact" className="section contact">
       <div className="container">
         <Reveal>
           <div className="contact-inner">
-            <h2 className="contact-title">Ready to Build?</h2>
-            <p className="contact-text">
-              Let's turn your vision into an intelligent, self-sustaining system
-              that deploys fast, runs continuously, and scales without limits.
-            </p>
-            <a href="mailto:hello@sherpalabs.tech" className="btn btn-primary btn-lg">
-              hello@sherpalabs.tech
-            </a>
+            <h2 className="contact-title terminal-heading">{'// '}{c.heading}</h2>
+            <p className="contact-text terminal-text">{c.cta}</p>
+
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="contact-name">{labels.name}</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder={placeholders.name || ''}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="contact-email">{labels.email}</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder={placeholders.email || ''}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="contact-message">{labels.message}</label>
+                <textarea
+                  id="contact-message"
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                  placeholder={placeholders.message || ''}
+                  rows={5}
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-primary btn-block"
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? '...' : `> ${labels.send}`.trim()}
+              </button>
+
+              {status === 'success' && (
+                <p className="form-status success">{`✓ ${c.success}`}</p>
+              )}
+              {status === 'error' && (
+                <p className="form-status error">{`✗ ${c.error}`}</p>
+              )}
+            </form>
           </div>
         </Reveal>
       </div>
@@ -301,17 +512,24 @@ function ContactSection() {
   );
 }
 
-/* ── Footer ── */
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
 function Footer() {
+  const { lang } = useLanguage();
+  const f = t('footer', lang);
+  const year = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="logo-icon">◆</span> Sherpa<span className="accent">Labs</span>
+            <GlitchText text={f.brand} className="footer-brand-glitch" />
           </div>
-          <p className="footer-copy">
-            © {new Date().getFullYear()} SherpaLabs. All rights reserved.
+          <p className="footer-copy terminal-text">
+            {f.copy.replace('{year}', year)}
           </p>
         </div>
       </div>
@@ -319,19 +537,34 @@ function Footer() {
   );
 }
 
-/* ── Root App ── */
+/* ═══════════════════════════════════════════
+   ROOT APP
+   ═══════════════════════════════════════════ */
+
 function App() {
+  const [lang, setLang] = useState(() => {
+    try { return localStorage.getItem('sl-lang') || 'en'; } catch { return 'en'; }
+  });
+
+  useEffect(() => {
+    try { localStorage.setItem('sl-lang', lang); } catch {}
+  }, [lang]);
+
   return (
-    <>
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <MissionSection />
-      <BuildSection />
-      <ValuesSection />
-      <ContactSection />
-      <Footer />
-    </>
+    <LanguageContext.Provider value={{ lang, setLang }}>
+      <div className="app-wrapper">
+        <Scanlines />
+        <Noise />
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
+        <MissionSection />
+        <BuildSection />
+        <ValuesSection />
+        <ContactSection />
+        <Footer />
+      </div>
+    </LanguageContext.Provider>
   );
 }
 
