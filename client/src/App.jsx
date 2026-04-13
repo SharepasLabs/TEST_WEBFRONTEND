@@ -169,7 +169,6 @@ function Navbar() {
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="nav-inner">
         <a href="#hero" className="nav-logo">
-          <img src="/logo.png" alt="SherpaLabs" className="nav-logo-img" />
           <GlitchText text={safeNav.logo} className="nav-logo-text" />
         </a>
 

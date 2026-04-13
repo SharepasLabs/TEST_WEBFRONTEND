@@ -10,7 +10,7 @@ export const translations = {
       cta: 'Get in Touch',
     },
     hero: {
-      eyebrow: 'Infrastructure Lab',
+      eyebrow: 'innovation',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: "We don't build prototypes. We build infrastructure.",
@@ -32,9 +32,9 @@ export const translations = {
     },
     mission: {
       heading: 'MISSION',
-      text: 'Create intelligent, production-ready systems that deploy rapidly and continuously evolve through automation.',
+      text: 'Guided by the Sherpa Mindset, we create intelligent, production-ready systems that deploy rapidly and continuously evolve through automation.',
       headingV: 'VISION',
-      textV: 'Become the infrastructure layer behind modern digital ventures.',
+      textV: 'Becoming the infrastructure layer behind modern digital ventures — Sherpa-guided, practical, precise.',
     },
     build: {
       heading: 'WHAT WE BUILD',
@@ -116,7 +116,7 @@ export const translations = {
       cta: 'Contactez-nous',
     },
     hero: {
-      eyebrow: 'Laboratoire d\'infrastructure',
+      eyebrow: 'innovation',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: 'Nous ne construisons pas de prototypes. Nous construisons de l\'infrastructure.',
@@ -138,9 +138,9 @@ export const translations = {
     },
     mission: {
       heading: 'MISSION',
-      text: 'Créer des systèmes intelligents prêts pour la production qui se déploient rapidement et évoluent continuellement grâce à l\'automatisation.',
+      text: 'Guidés par le Sherpa Mindset, nous créons des systèmes intelligents prêts pour la production qui se déploient rapidement et évoluent continuellement grâce à l\'automatisation.',
       headingV: 'VISION',
-      textV: 'Devenir la couche d\'infrastructure derrière les ventures numériques modernes.',
+      textV: 'Devenir la couche d\'infrastructure derrière les ventures numériques modernes — guidé par Sherpa, pratique, précis.',
     },
     build: {
       heading: 'CE QUE NOUS CONSTRUISONS',
@@ -222,7 +222,7 @@ export const translations = {
       cta: 'Entre em contato',
     },
     hero: {
-      eyebrow: 'Laboratório de infraestrutura',
+      eyebrow: 'inovação',
       title: 'Sherpa',
       titleSuffix: 'Labs',
       heroLine: 'Não construímos protótipos. Construímos infraestrutura.',
@@ -244,9 +244,9 @@ export const translations = {
     },
     mission: {
       heading: 'MISSÃO',
-      text: 'Criar sistemas inteligentes prontos para produção que são implantados rapidamente e evoluem continuamente através da automação.',
+      text: 'Guiados pelo Sherpa Mindset, criamos sistemas inteligentes prontos para produção que são implantados rapidamente e evoluem continuamente através da automação.',
       headingV: 'VISÃO',
-      textV: 'Tornar-se a camada de infraestrutura por trás dos empreendimentos digitais modernos.',
+      textV: 'Tornar-se a camada de infraestrutura por trás dos empreendimentos digitais modernos — guiado por Sherpa, prático, preciso.',
     },
     build: {
       heading: 'O QUE CONSTRUÍMOS',
