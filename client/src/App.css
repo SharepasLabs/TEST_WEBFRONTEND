@@ -834,6 +834,22 @@ body {
   color: var(--accent);
 }
 
+.boat-definition {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(0, 255, 119, 0.05);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+}
+
+.boat-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  margin: 0;
+}
+
 .ip-card {
   padding: 28px 24px;
   background: var(--bg-card);

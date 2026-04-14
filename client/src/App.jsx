@@ -391,6 +391,7 @@ function BuildSection() {
 function PartnersSection() {
   const { lang } = useLanguage();
   const p = t('partners', lang);
+  const boatDef = p.boatDefinition || {};
 
   return (
     <section id="partners" className="section partners">
@@ -413,6 +414,11 @@ function PartnersSection() {
                     </div>
                   ))}
                 </div>
+                {cat.title.includes('BOAT') && boatDef.text && (
+                  <div className="boat-definition">
+                    <p className="boat-text">{boatDef.text}</p>
+                  </div>
+                )}
               </div>
             </Reveal>
           ))}

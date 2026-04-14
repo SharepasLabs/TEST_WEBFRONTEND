@@ -67,6 +67,10 @@ export const translations = {
           brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
         },
         {
+          title: 'Gartner BOAT Stack',
+          brands: ['Backbone', 'Orchestration', 'Agentic AI', 'Tools'],
+        },
+        {
           title: 'Orchestration & DevOps',
           brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
         },
@@ -75,6 +79,9 @@ export const translations = {
           brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
         },
       ],
+      boatDefinition: {
+        text: 'BOAT: Backbone (core infrastructure), Orchestration (workflow management), Agentic AI (autonomous agents), Tools (integration layer) — Gartner\'s framework for enterprise AI architecture.',
+      },
     },
     ip: {
       heading: 'IP & LICENSING',
@@ -234,6 +241,10 @@ export const translations = {
           brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
         },
         {
+          title: 'Gartner BOAT Stack',
+          brands: ['Backbone', 'Orchestration', 'Agentic AI', 'Tools'],
+        },
+        {
           title: 'Orchestration & DevOps',
           brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
         },
@@ -242,6 +253,9 @@ export const translations = {
           brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
         },
       ],
+      boatDefinition: {
+        text: 'BOAT : Backbone (infrastructure de base), Orchestration (gestion des workflows), Agentic AI (agents autonomes), Tools (couche d\'intégration) — le framework de Gartner pour l\'architecture IA d\'entreprise.',
+      },
     },
     ip: {
       heading: 'PI & LICENCE',
@@ -401,6 +415,10 @@ export const translations = {
           brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
         },
         {
+          title: 'Gartner BOAT Stack',
+          brands: ['Backbone', 'Orchestration', 'Agentic AI', 'Tools'],
+        },
+        {
           title: 'Orquestração & DevOps',
           brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
         },
@@ -409,6 +427,9 @@ export const translations = {
           brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
         },
       ],
+      boatDefinition: {
+        text: 'BOAT: Backbone (infraestrutura principal), Orchestration (gestão de fluxos), Agentic AI (agentes autônomos), Tools (camada de integração) — framework da Gartner para arquitetura de IA empresarial.',
+      },
     },
     ip: {
       heading: 'PI & LICENCIAMENTO',
