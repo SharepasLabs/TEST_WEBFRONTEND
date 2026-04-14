@@ -5,6 +5,8 @@ export const translations = {
       about: 'About',
       mission: 'Mission',
       build: 'What We Build',
+      ip: 'IP & Licensing',
+      partners: 'Partners',
       values: 'Values',
       contact: 'Contact',
       cta: 'Get in Touch',
@@ -35,6 +37,65 @@ export const translations = {
       text: 'Guided by the Sherpa Mindset, we create intelligent, production-ready systems that deploy rapidly and continuously evolve through automation.',
       headingV: 'VISION',
       textV: 'Becoming the infrastructure layer behind modern digital ventures — Sherpa-guided, practical, precise.',
+    },
+    partners: {
+      heading: 'PARTNERS & PROVIDERS',
+      subtitle: 'We build on the shoulders of giants. Our solutions integrate with the industry\'s leading platforms.',
+      categories: [
+        {
+          title: 'AI & LLM Providers',
+          brands: ['OpenAI', 'Anthropic', 'Google DeepMind', 'Meta AI', 'Mistral AI', 'Cohere', 'xAI', 'Hugging Face'],
+        },
+        {
+          title: 'Automation & RPA',
+          brands: ['n8n', 'UiPath', 'Automation Anywhere', 'Microsoft Power Automate', 'Zapier', 'Make', 'Workato', 'Blue Prism'],
+        },
+        {
+          title: 'Agentic Frameworks',
+          brands: ['LangChain', 'LlamaIndex', 'CrewAI', 'AutoGen', 'Semantic Kernel', 'Haystack', 'Flowise'],
+        },
+        {
+          title: 'Knowledge & Productivity',
+          brands: ['Obsidian', 'Notion', 'Airtable', 'Slack', 'Microsoft 365', 'Google Workspace', 'Trello', 'Asana'],
+        },
+        {
+          title: 'Cloud & Infrastructure',
+          brands: ['AWS', 'Azure', 'Google Cloud', 'DigitalOcean', 'Vercel', 'Cloudflare', 'GitHub', 'Docker'],
+        },
+        {
+          title: 'Data & Analytics',
+          brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
+        },
+        {
+          title: 'Orchestration & DevOps',
+          brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
+        },
+        {
+          title: 'CRM & Sales',
+          brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
+        },
+      ],
+    },
+    ip: {
+      heading: 'IP & LICENSING',
+      subtitle: 'We don\'t just build for clients. We build, license, and sell our own intellectual property.',
+      cards: [
+        {
+          title: 'Proprietary Stacks',
+          desc: 'Access our pre-built, production-grade AI infrastructure through flexible licensing agreements.',
+          tag: 'License',
+        },
+        {
+          title: 'Custom IP Development',
+          desc: 'Commission bespoke technology solutions where you retain full ownership of the resulting intellectual property.',
+          tag: 'Own',
+        },
+        {
+          title: 'Enterprise Solutions',
+          desc: 'Deploy our proven automation frameworks across your organization with dedicated support and custom integration.',
+          tag: 'Deploy',
+        },
+      ],
     },
     build: {
       heading: 'WHAT WE BUILD',
@@ -111,6 +172,8 @@ export const translations = {
       about: 'À propos',
       mission: 'Mission',
       build: 'Ce que nous construisons',
+      ip: 'PI & Licence',
+      partners: 'Partenaires',
       values: 'Valeurs',
       contact: 'Contact',
       cta: 'Contactez-nous',
@@ -141,6 +204,65 @@ export const translations = {
       text: 'Guidés par le Sherpa Mindset, nous créons des systèmes intelligents prêts pour la production qui se déploient rapidement et évoluent continuellement grâce à l\'automatisation.',
       headingV: 'VISION',
       textV: 'Devenir la couche d\'infrastructure derrière les ventures numériques modernes — guidé par Sherpa, pratique, précis.',
+    },
+    partners: {
+      heading: 'PARTENAIRES & FOURNISSEURS',
+      subtitle: 'Nous nous appuyons sur les géants de l\'industrie. Nos solutions s\'intègrent aux plateformes les plus performantes.',
+      categories: [
+        {
+          title: 'IA & Fournisseurs LLM',
+          brands: ['OpenAI', 'Anthropic', 'Google DeepMind', 'Meta AI', 'Mistral AI', 'Cohere', 'xAI', 'Hugging Face'],
+        },
+        {
+          title: 'Automatisation & RPA',
+          brands: ['n8n', 'UiPath', 'Automation Anywhere', 'Microsoft Power Automate', 'Zapier', 'Make', 'Workato', 'Blue Prism'],
+        },
+        {
+          title: 'Frameworks Agentiques',
+          brands: ['LangChain', 'LlamaIndex', 'CrewAI', 'AutoGen', 'Semantic Kernel', 'Haystack', 'Flowise'],
+        },
+        {
+          title: 'Connaissance & Productivité',
+          brands: ['Obsidian', 'Notion', 'Airtable', 'Slack', 'Microsoft 365', 'Google Workspace', 'Trello', 'Asana'],
+        },
+        {
+          title: 'Cloud & Infrastructure',
+          brands: ['AWS', 'Azure', 'Google Cloud', 'DigitalOcean', 'Vercel', 'Cloudflare', 'GitHub', 'Docker'],
+        },
+        {
+          title: 'Données & Analytique',
+          brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
+        },
+        {
+          title: 'Orchestration & DevOps',
+          brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
+        },
+        {
+          title: 'CRM & Ventes',
+          brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
+        },
+      ],
+    },
+    ip: {
+      heading: 'PI & LICENCE',
+      subtitle: 'Nous ne construisons pas seulement pour les clients. Nous construisons, licenciions et vendons notre propre propriété intellectuelle.',
+      cards: [
+        {
+          title: 'Stacks propriétaires',
+          desc: 'Accédez à notre infrastructure IA pré-construite de qualité production via des accords de licence flexibles.',
+          tag: 'Licence',
+        },
+        {
+          title: 'Développement de PI sur mesure',
+          desc: 'Commandez des solutions technologiques sur mesure où vous conservez la pleine propriété de la propriété intellectuelle.',
+          tag: 'Posséder',
+        },
+        {
+          title: 'Solutions d\'entreprise',
+          desc: 'Déployez nos cadres d\'automatisation éprouvés dans votre organisation avec un support dédié.',
+          tag: 'Déployer',
+        },
+      ],
     },
     build: {
       heading: 'CE QUE NOUS CONSTRUISONS',
@@ -217,6 +339,8 @@ export const translations = {
       about: 'Sobre',
       mission: 'Missão',
       build: 'O que construímos',
+      ip: 'PI & Licenciamento',
+      partners: 'Parceiros',
       values: 'Valores',
       contact: 'Contato',
       cta: 'Entre em contato',
@@ -247,6 +371,65 @@ export const translations = {
       text: 'Guiados pelo Sherpa Mindset, criamos sistemas inteligentes prontos para produção que são implantados rapidamente e evoluem continuamente através da automação.',
       headingV: 'VISÃO',
       textV: 'Tornar-se a camada de infraestrutura por trás dos empreendimentos digitais modernos — guiado por Sherpa, prático, preciso.',
+    },
+    partners: {
+      heading: 'PARCEIROS & FORNECEDORES',
+      subtitle: 'Construímos sobre os ombros de gigantes. Nossas soluções se integram às principais plataformas da indústria.',
+      categories: [
+        {
+          title: 'IA & Provedores LLM',
+          brands: ['OpenAI', 'Anthropic', 'Google DeepMind', 'Meta AI', 'Mistral AI', 'Cohere', 'xAI', 'Hugging Face'],
+        },
+        {
+          title: 'Automação & RPA',
+          brands: ['n8n', 'UiPath', 'Automation Anywhere', 'Microsoft Power Automate', 'Zapier', 'Make', 'Workato', 'Blue Prism'],
+        },
+        {
+          title: 'Frameworks Agênticos',
+          brands: ['LangChain', 'LlamaIndex', 'CrewAI', 'AutoGen', 'Semantic Kernel', 'Haystack', 'Flowise'],
+        },
+        {
+          title: 'Conhecimento & Produtividade',
+          brands: ['Obsidian', 'Notion', 'Airtable', 'Slack', 'Microsoft 365', 'Google Workspace', 'Trello', 'Asana'],
+        },
+        {
+          title: 'Cloud & Infraestrutura',
+          brands: ['AWS', 'Azure', 'Google Cloud', 'DigitalOcean', 'Vercel', 'Cloudflare', 'GitHub', 'Docker'],
+        },
+        {
+          title: 'Dados & Análise',
+          brands: ['Snowflake', 'Databricks', 'Tableau', 'Power BI', 'MongoDB', 'PostgreSQL', 'Redis', 'Elasticsearch'],
+        },
+        {
+          title: 'Orquestração & DevOps',
+          brands: ['Kubernetes', 'Terraform', 'Jenkins', 'GitLab', 'CircleCI', 'Datadog', 'New Relic', 'Grafana'],
+        },
+        {
+          title: 'CRM & Vendas',
+          brands: ['Salesforce', 'HubSpot', 'Pipedrive', 'Zendesk', 'Intercom', 'Stripe', 'Shopify', 'Mailchimp'],
+        },
+      ],
+    },
+    ip: {
+      heading: 'PI & LICENCIAMENTO',
+      subtitle: 'Não construímos apenas para clientes. Construímos, licenciamos e vendemos nossa própria propriedade intelectual.',
+      cards: [
+        {
+          title: 'Stacks Proprietários',
+          desc: 'Acesse nossa infraestrutura de IA pré-construída de qualidade de produção através de acordos de licenciamento flexíveis.',
+          tag: 'Licença',
+        },
+        {
+          title: 'Desenvolvimento de PI Sob Medida',
+          desc: 'Comissione soluções tecnológicas sob medida onde você retém toda a propriedade da propriedade intelectual resultante.',
+          tag: 'Possuir',
+        },
+        {
+          title: 'Soluções Empresariais',
+          desc: 'Implante nossos frameworks de automação comprovados em sua organização com suporte dedicado.',
+          tag: 'Implantar',
+        },
+      ],
     },
     build: {
       heading: 'O QUE CONSTRUÍMOS',

@@ -161,6 +161,8 @@ function Navbar() {
     { href: '#about', label: safeNav.about },
     { href: '#mission', label: safeNav.mission },
     { href: '#build', label: safeNav.build },
+    { href: '#ip', label: safeNav.ip || 'IP' },
+    { href: '#partners', label: safeNav.partners || 'Partners' },
     { href: '#values', label: safeNav.values },
     { href: '#contact', label: safeNav.contact },
   ];
@@ -383,6 +385,77 @@ function BuildSection() {
 }
 
 /* ═══════════════════════════════════════════
+   PARTNERS & PROVIDERS
+   ═══════════════════════════════════════════ */
+
+function PartnersSection() {
+  const { lang } = useLanguage();
+  const p = t('partners', lang);
+
+  return (
+    <section id="partners" className="section partners">
+      <div className="container">
+        <Reveal>
+          <h2 className="section-title terminal-heading">{'// '}{p.heading}</h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="section-subtitle">{p.subtitle}</p>
+        </Reveal>
+        <div className="partners-grid">
+          {p.categories.map((cat, i) => (
+            <Reveal key={i} delay={150 + i * 80}>
+              <div className="partner-category">
+                <h4>{'> '}{cat.title}</h4>
+                <div className="partner-logos">
+                  {cat.brands.map((brand, j) => (
+                    <div key={j} className="partner-logo" title={brand}>
+                      <span>{brand}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   IP & LICENSING
+   ═══════════════════════════════════════════ */
+
+function IPSection() {
+  const { lang } = useLanguage();
+  const ip = t('ip', lang);
+
+  return (
+    <section id="ip" className="section ip">
+      <div className="container">
+        <Reveal>
+          <h2 className="section-title terminal-heading">{'// '}{ip.heading}</h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="section-subtitle">{ip.subtitle}</p>
+        </Reveal>
+        <div className="ip-grid">
+          {ip.cards.map((c, i) => (
+            <Reveal key={i} delay={200 + i * 100}>
+              <div className="ip-card terminal-card">
+                <h4>{'$ '}{c.title}</h4>
+                <p>{c.desc}</p>
+                <span className="ip-tag">{c.tag}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════
    CORE VALUES
    ═══════════════════════════════════════════ */
 
@@ -566,6 +639,8 @@ function App() {
         <AboutSection />
         <MissionSection />
         <BuildSection />
+        <IPSection />
+        <PartnersSection />
         <ValuesSection />
         <ContactSection />
         <Footer />
