@@ -547,15 +547,18 @@ body {
 }
 
 .partner-logo img {
-  max-width: 100%;
-  max-height: 50px;
+  max-width: 60px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.7);
+  opacity: 0.5;
   transition: var(--transition);
 }
 
 .partner-logo:hover img {
-  filter: grayscale(0%) opacity(1);
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .partner-fallback {
