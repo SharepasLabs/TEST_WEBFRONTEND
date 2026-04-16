@@ -552,13 +552,15 @@ body {
   width: auto;
   height: auto;
   object-fit: contain;
-  opacity: 0.5;
+  opacity: 0.6;
+  filter: invert(38%) sepia(91%) saturate(2646%) hue-rotate(234deg) brightness(97%) contrast(97%);
   transition: var(--transition);
 }
 
 .partner-logo:hover img {
   opacity: 1;
   transform: scale(1.1);
+  filter: invert(38%) sepia(91%) saturate(2646%) hue-rotate(234deg) brightness(97%) contrast(97%);
 }
 
 .partner-fallback {

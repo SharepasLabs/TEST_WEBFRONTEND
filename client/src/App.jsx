@@ -389,7 +389,7 @@ function PartnersSection() {
       'Mailchimp': 'mailchimp',
     };
     const slug = iconMap[brand] || brand.toLowerCase().replace(/\s+/g, '');
-    return `https://cdn.simpleicons.org/${slug}/8B5CF6`;
+    return `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`;
   };
 
   return (
