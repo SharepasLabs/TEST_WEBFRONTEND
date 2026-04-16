@@ -321,38 +321,24 @@ function PartnersSection() {
   const p = t('partners', lang);
   const boatDef = p.boatDefinition || {};
 
-  // Helper to get icon URL (using Simple Icons CDN)
+  // Helper to get icon URL (using Simple Icons CDN) - only for available icons
   const getIconUrl = (brand) => {
     const iconMap = {
       'OpenAI': 'openai',
       'Anthropic': 'anthropic',
-      'Google DeepMind': 'google',
       'Meta AI': 'meta',
-      'Mistral AI': 'mistral',
-      'Cohere': 'cohere',
-      'xAI': 'x',
       'Hugging Face': 'huggingface',
       'n8n': 'n8n',
       'UiPath': 'uipath',
-      'Automation Anywhere': 'automationanywhere',
       'Microsoft Power Automate': 'microsoft',
       'Zapier': 'zapier',
       'Make': 'make',
-      'Workato': 'workato',
-      'Blue Prism': 'blueprism',
       'LangChain': 'langchain',
-      'LlamaIndex': 'llamaindex',
       'CrewAI': 'crewai',
-      'AutoGen': 'autogen',
-      'Semantic Kernel': 'semantickernel',
       'Haystack': 'haystack',
-      'Flowise': 'flowise',
       'Obsidian': 'obsidian',
       'Notion': 'notion',
-      'Airtable': 'airtable',
       'Slack': 'slack',
-      'Microsoft 365': 'microsoft',
-      'Google Workspace': 'google',
       'Trello': 'trello',
       'Asana': 'asana',
       'AWS': 'amazonaws',
@@ -365,8 +351,6 @@ function PartnersSection() {
       'Docker': 'docker',
       'Snowflake': 'snowflake',
       'Databricks': 'databricks',
-      'Tableau': 'tableau',
-      'Power BI': 'powerbi',
       'MongoDB': 'mongodb',
       'PostgreSQL': 'postgresql',
       'Redis': 'redis',
@@ -381,15 +365,15 @@ function PartnersSection() {
       'Grafana': 'grafana',
       'Salesforce': 'salesforce',
       'HubSpot': 'hubspot',
-      'Pipedrive': 'pipedrive',
       'Zendesk': 'zendesk',
-      'Intercom': 'intercom',
       'Stripe': 'stripe',
       'Shopify': 'shopify',
       'Mailchimp': 'mailchimp',
+      'Google DeepMind': 'google',
+      'Google Workspace': 'google',
     };
-    const slug = iconMap[brand] || brand.toLowerCase().replace(/\s+/g, '');
-    return `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`;
+    const slug = iconMap[brand];
+    return slug ? `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg` : null;
   };
 
   return (
@@ -407,19 +391,21 @@ function PartnersSection() {
               <div className="partner-category">
                 <h4>{cat.title}</h4>
                 <div className="partner-logos">
-                  {cat.brands.map((brand, j) => (
-                    <div key={j} className="partner-logo" title={brand}>
-                      <img 
-                        src={getIconUrl(brand)} 
-                        alt={brand}
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextElementSibling.style.display = 'block';
-                        }}
-                      />
-                      <span className="partner-fallback" style={{ display: 'none' }}>{brand}</span>
-                    </div>
-                  ))}
+                  {cat.brands.map((brand, j) => {
+                    const iconUrl = getIconUrl(brand);
+                    return (
+                      <div key={j} className="partner-logo" title={brand}>
+                        {iconUrl ? (
+                          <img 
+                            src={iconUrl} 
+                            alt={brand}
+                          />
+                        ) : (
+                          <span className="partner-fallback">{brand}</span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
                 {cat.title.includes('BOAT') && boatDef.text && (
                   <div className="boat-definition">
