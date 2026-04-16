@@ -321,11 +321,82 @@ function PartnersSection() {
   const p = t('partners', lang);
   const boatDef = p.boatDefinition || {};
 
+  // Helper to get logo URL (using Clearbit Logo API)
+  const getLogoUrl = (brand) => {
+    const domainMap = {
+      'OpenAI': 'openai.com',
+      'Anthropic': 'anthropic.com',
+      'Google DeepMind': 'deepmind.com',
+      'Meta AI': 'meta.com',
+      'Mistral AI': 'mistral.ai',
+      'Cohere': 'cohere.ai',
+      'xAI': 'x.ai',
+      'Hugging Face': 'huggingface.co',
+      'n8n': 'n8n.io',
+      'UiPath': 'uipath.com',
+      'Automation Anywhere': 'automationanywhere.com',
+      'Microsoft Power Automate': 'microsoft.com',
+      'Zapier': 'zapier.com',
+      'Make': 'make.com',
+      'Workato': 'workato.com',
+      'Blue Prism': 'blueprism.com',
+      'LangChain': 'langchain.com',
+      'LlamaIndex': 'llamaindex.ai',
+      'CrewAI': 'crewai.com',
+      'AutoGen': 'autogen.com',
+      'Semantic Kernel': 'semantickernel.ai',
+      'Haystack': 'haystack.deepset.ai',
+      'Flowise': 'flowiseai.com',
+      'Obsidian': 'obsidian.md',
+      'Notion': 'notion.so',
+      'Airtable': 'airtable.com',
+      'Slack': 'slack.com',
+      'Microsoft 365': 'microsoft.com',
+      'Google Workspace': 'workspace.google.com',
+      'Trello': 'trello.com',
+      'Asana': 'asana.com',
+      'AWS': 'aws.amazon.com',
+      'Azure': 'azure.microsoft.com',
+      'Google Cloud': 'cloud.google.com',
+      'DigitalOcean': 'digitalocean.com',
+      'Vercel': 'vercel.com',
+      'Cloudflare': 'cloudflare.com',
+      'GitHub': 'github.com',
+      'Docker': 'docker.com',
+      'Snowflake': 'snowflake.com',
+      'Databricks': 'databricks.com',
+      'Tableau': 'tableau.com',
+      'Power BI': 'powerbi.microsoft.com',
+      'MongoDB': 'mongodb.com',
+      'PostgreSQL': 'postgresql.org',
+      'Redis': 'redis.io',
+      'Elasticsearch': 'elastic.co',
+      'Kubernetes': 'kubernetes.io',
+      'Terraform': 'terraform.io',
+      'Jenkins': 'jenkins.io',
+      'GitLab': 'gitlab.com',
+      'CircleCI': 'circleci.com',
+      'Datadog': 'datadoghq.com',
+      'New Relic': 'newrelic.com',
+      'Grafana': 'grafana.com',
+      'Salesforce': 'salesforce.com',
+      'HubSpot': 'hubspot.com',
+      'Pipedrive': 'pipedrive.com',
+      'Zendesk': 'zendesk.com',
+      'Intercom': 'intercom.com',
+      'Stripe': 'stripe.com',
+      'Shopify': 'shopify.com',
+      'Mailchimp': 'mailchimp.com',
+    };
+    const domain = domainMap[brand] || brand.toLowerCase().replace(/\s+/g, '') + '.com';
+    return `https://logo.clearbit.com/${domain}?size=80`;
+  };
+
   return (
     <section id="partners" className="section partners">
       <div className="container">
         <Reveal>
-          <h2 className="section-title ">{'// '}{p.heading}</h2>
+          <h2 className="section-title">{p.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{p.subtitle}</p>
@@ -334,11 +405,19 @@ function PartnersSection() {
           {p.categories.map((cat, i) => (
             <Reveal key={i} delay={150 + i * 80}>
               <div className="partner-category">
-                <h4>{'> '}{cat.title}</h4>
+                <h4>{cat.title}</h4>
                 <div className="partner-logos">
                   {cat.brands.map((brand, j) => (
                     <div key={j} className="partner-logo" title={brand}>
-                      <span>{brand}</span>
+                      <img 
+                        src={getLogoUrl(brand)} 
+                        alt={brand}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextElementSibling.style.display = 'block';
+                        }}
+                      />
+                      <span className="partner-fallback" style={{ display: 'none' }}>{brand}</span>
                     </div>
                   ))}
                 </div>
