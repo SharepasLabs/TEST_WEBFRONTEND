@@ -71,75 +71,6 @@ function Reveal({ children, delay = 0 }) {
 }
 
 /* ═══════════════════════════════════════════
-   GLITCH TEXT COMPONENT
-   ═══════════════════════════════════════════ */
-
-function GlitchText({ text, className = '' }) {
-  return (
-    <span className={`glitch-text ${className}`} data-text={text}>
-      {text}
-    </span>
-  );
-}
-
-/* ═══════════════════════════════════════════
-   SCANLINE OVERLAY
-   ═══════════════════════════════════════════ */
-
-function Scanlines() {
-  return <div className="scanlines" aria-hidden="true" />;
-}
-
-/* ═══════════════════════════════════════════
-   NOISE OVERLAY
-   ═══════════════════════════════════════════ */
-
-function Noise() {
-  return <div className="noise" aria-hidden="true" />;
-}
-
-/* ═══════════════════════════════════════════
-   MATRIX RAIN (hero background)
-   ═══════════════════════════════════════════ */
-
-function MatrixRain() {
-  const canvasRef = useRef(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w = (canvas.width = canvas.offsetWidth);
-    let h = (canvas.height = canvas.offsetHeight);
-    const cols = Math.floor(w / 18);
-    const drops = Array(cols).fill(1);
-    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン01';
-
-    let raf;
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
-      ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = 'rgba(0, 255, 70, 0.08)';
-      ctx.font = '14px "JetBrains Mono", monospace';
-
-      for (let i = 0; i < cols; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(char, i * 18, drops[i] * 18);
-        if (drops[i] * 18 > h && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      }
-      raf = requestAnimationFrame(draw);
-    }
-    draw();
-
-    const onResize = () => { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; };
-    window.addEventListener('resize', onResize);
-
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
-  }, []);
-  return <canvas ref={canvasRef} className="matrix-rain" aria-hidden="true" />;
-}
-
-/* ═══════════════════════════════════════════
    NAVBAR
    ═══════════════════════════════════════════ */
 
@@ -171,7 +102,7 @@ function Navbar() {
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="nav-inner">
         <a href="#hero" className="nav-logo">
-          <GlitchText text={safeNav.logo} className="nav-logo-text" />
+          {safeNav.logo}
         </a>
 
         {/* Desktop links */}
@@ -238,20 +169,17 @@ function HeroSection() {
 
   return (
     <section id="hero" className="hero">
-      <MatrixRain />
-      <div className="hero-glow" />
       <div className="hero-content">
         <Reveal>
-          <p className="hero-eyebrow">{'> '}{hero.eyebrow}<span className="cursor-blink">_</span></p>
+          <p className="hero-eyebrow">{hero.eyebrow}</p>
         </Reveal>
         <Reveal delay={150}>
           <h1 className="hero-title">
-            <GlitchText text={hero.title} />
-            <span className="accent">|{hero.titleSuffix}</span>
+            {hero.title}<span className="accent"> | {hero.titleSuffix}</span>
           </h1>
         </Reveal>
         <Reveal delay={300}>
-          <p className="hero-line terminal-text">{hero.heroLine}</p>
+          <p className="hero-line">{hero.heroLine}</p>
         </Reveal>
         <Reveal delay={400}>
           <p className="hero-tagline">{hero.tagline}</p>
@@ -287,7 +215,7 @@ function AboutSection() {
     <section id="about" className="section about">
       <div className="container">
         <Reveal>
-          <h2 className="section-title terminal-heading">{'// '}{about.heading}</h2>
+          <h2 className="section-title ">{'// '}{about.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{about.subtitle}</p>
@@ -326,7 +254,7 @@ function MissionSection() {
       <div className="container">
         <div className="mission-grid">
           <Reveal>
-            <div className="mission-card terminal-card">
+            <div className="mission-card ">
               <span className="mission-asciidoc">┌─── MISSION ───┐</span>
               <p className="mission-text">
                 {m.text}
@@ -334,7 +262,7 @@ function MissionSection() {
             </div>
           </Reveal>
           <Reveal delay={200}>
-            <div className="mission-card terminal-card">
+            <div className="mission-card ">
               <span className="mission-asciidoc">┌─── VISION ───┐</span>
               <p className="mission-text">
                 {m.textV}
@@ -363,7 +291,7 @@ function BuildSection() {
     <section id="build" className="section build">
       <div className="container">
         <Reveal>
-          <h2 className="section-title terminal-heading">{'// '}{build.heading}</h2>
+          <h2 className="section-title ">{'// '}{build.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{build.subtitle}</p>
@@ -371,7 +299,7 @@ function BuildSection() {
         <div className="build-grid">
           {cards.map((c, i) => (
             <Reveal key={i} delay={150 + i * 80}>
-              <div className="build-card terminal-card">
+              <div className="build-card ">
                 <span className="build-card-icon">{c.icon}</span>
                 <h4>{'$ '}{c.title}</h4>
                 <p>{c.desc}</p>
@@ -397,7 +325,7 @@ function PartnersSection() {
     <section id="partners" className="section partners">
       <div className="container">
         <Reveal>
-          <h2 className="section-title terminal-heading">{'// '}{p.heading}</h2>
+          <h2 className="section-title ">{'// '}{p.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{p.subtitle}</p>
@@ -440,7 +368,7 @@ function IPSection() {
     <section id="ip" className="section ip">
       <div className="container">
         <Reveal>
-          <h2 className="section-title terminal-heading">{'// '}{ip.heading}</h2>
+          <h2 className="section-title ">{'// '}{ip.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{ip.subtitle}</p>
@@ -448,7 +376,7 @@ function IPSection() {
         <div className="ip-grid">
           {ip.cards.map((c, i) => (
             <Reveal key={i} delay={200 + i * 100}>
-              <div className="ip-card terminal-card">
+              <div className="ip-card ">
                 <h4>{'$ '}{c.title}</h4>
                 <p>{c.desc}</p>
                 <span className="ip-tag">{c.tag}</span>
@@ -477,7 +405,7 @@ function ValuesSection() {
     <section id="values" className="section values">
       <div className="container">
         <Reveal>
-          <h2 className="section-title terminal-heading">{'// '}{v.heading}</h2>
+          <h2 className="section-title ">{'// '}{v.heading}</h2>
         </Reveal>
         <Reveal delay={100}>
           <p className="section-subtitle">{v.subtitle}</p>
@@ -487,7 +415,7 @@ function ValuesSection() {
             <Reveal key={i} delay={200 + i * 100}>
               <div className="value-card">
                 <span className="value-number">{String(i + 1).padStart(2, '0')}</span>
-                <p className="terminal-text">{`> ${item}`}</p>
+                <p className="">{`> ${item}`}</p>
               </div>
             </Reveal>
           ))}
@@ -537,8 +465,8 @@ function ContactSection() {
       <div className="container">
         <Reveal>
           <div className="contact-inner">
-            <h2 className="contact-title terminal-heading">{'// '}{c.heading}</h2>
-            <p className="contact-text terminal-text">{c.cta}</p>
+            <h2 className="contact-title">{c.heading}</h2>
+            <p className="contact-text">{c.cta}</p>
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
@@ -579,7 +507,7 @@ function ContactSection() {
                 className="btn btn-primary btn-block"
                 disabled={status === 'sending'}
               >
-                {status === 'sending' ? '...' : `> ${labels.send}`.trim()}
+                {status === 'sending' ? '...' : labels.send}
               </button>
 
               {status === 'success' && (
@@ -611,9 +539,9 @@ function Footer() {
       <div className="container">
         <div className="footer-inner">
           <div className="footer-brand">
-            <GlitchText text={safeF.brand} className="footer-brand-glitch" />
+            {safeF.brand}
           </div>
-          <p className="footer-copy terminal-text">
+          <p className="footer-copy">
             {(safeF.copy || '© {year} SherpaLabs.').replace('{year}', year)}
           </p>
         </div>
@@ -638,8 +566,6 @@ function App() {
   return (
     <LanguageContext.Provider value={{ lang, setLang }}>
       <div className="app-wrapper">
-        <Scanlines />
-        <Noise />
         <Navbar />
         <HeroSection />
         <AboutSection />
