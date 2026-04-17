@@ -127,10 +127,10 @@ function Navbar() {
                 onMouseEnter={() => setDropdownOpen(i)}
                 onMouseLeave={() => setDropdownOpen(null)}
               >
-                <a href="#" className="nav-link-with-dropdown">
+                <span className="nav-link-with-dropdown">
                   {item.label}
                   <span className="dropdown-arrow">▼</span>
-                </a>
+                </span>
                 {dropdownOpen === i && (
                   <div className="dropdown-menu">
                     {item.dropdown.map((link, j) => (
