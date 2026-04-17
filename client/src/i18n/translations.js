@@ -259,7 +259,7 @@ export const translations = {
     },
     ip: {
       heading: 'PI & LICENCE',
-      subtitle: 'Nous ne construisons pas seulement pour les clients. Nous construisons, licenciions et vendons notre propre propriété intellectuelle.',
+      subtitle: 'Nous ne construisons pas seulement pour les clients. Nous construisons, licencions et vendons notre propre propriété intellectuelle.',
       cards: [
         {
           title: 'Stacks propriétaires',
@@ -370,7 +370,7 @@ export const translations = {
     },
     about: {
       heading: 'QUEM SOMOS',
-      subtitle: 'Não construímos apenas tecnologia. Guidamos fundadores e empresas através da complexidade de transformar ideias em sistemas autônomos de qualidade produção.',
+      subtitle: 'Não construímos apenas tecnologia. Guiamos fundadores e empresas através da complexidade de transformar ideias em sistemas autônomos de qualidade produção.',
       body: 'O <strong>Sherpa Mindset</strong> significa que lideramos com experiência, avançamos com precisão e entregamos com total responsabilidade — da primeira sessão no quadro branco até a implantação final. Existimos para ajudar outros a alcançar terrenos mais altos, mais rápido.',
       points: [
         'Guiar através da complexidade, não apenas construir soluções',
@@ -442,7 +442,7 @@ export const translations = {
         },
         {
           title: 'Desenvolvimento de PI Sob Medida',
-          desc: 'Comissione soluções tecnológicas sob medida onde você retém toda a propriedade da propriedade intelectual resultante.',
+          desc: 'Solicite soluções tecnológicas sob medida onde você retém toda a propriedade da propriedade intelectual resultante.',
           tag: 'Possuir',
         },
         {
