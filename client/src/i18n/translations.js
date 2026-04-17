@@ -113,6 +113,11 @@ export const translations = {
           tag: 'License',
         },
         {
+          title: 'Vivarium',
+          desc: 'Virtual access platform for vibe-coded environments — immersive, AI-generated spaces for collaboration, experimentation, and creative exploration.',
+          tag: 'License',
+        },
+        {
           title: 'Custom IP Development',
           desc: 'Commission bespoke technology solutions where you retain full ownership of the resulting intellectual property.',
           tag: 'Own',
@@ -307,6 +312,11 @@ export const translations = {
           tag: 'Licence',
         },
         {
+          title: 'Vivarium',
+          desc: 'Plateforme d\'accès virtuel aux environnements vibe-coded — espaces immersifs générés par IA pour la collaboration, l\'expérimentation et l\'exploration créative.',
+          tag: 'Licence',
+        },
+        {
           title: 'Développement de PI sur mesure',
           desc: 'Commandez des solutions technologiques sur mesure où vous conservez la pleine propriété de la propriété intellectuelle.',
           tag: 'Posséder',
@@ -498,6 +508,11 @@ export const translations = {
         {
           title: 'SANDBOX I/O',
           desc: 'Ambiente sandbox seguro permitindo acesso seguro a recursos externos e conteúdo visual. Conformidade MPAA ready para gerenciamento de mídia.',
+          tag: 'Licença',
+        },
+        {
+          title: 'Vivarium',
+          desc: 'Plataforma de acesso virtual a ambientes vibe-coded — espaços imersivos gerados por IA para colaboração, experimentação e exploração criativa.',
           tag: 'Licença',
         },
         {
