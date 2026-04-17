@@ -98,32 +98,78 @@ body {
   gap: 32px;
 }
 
-.nav-links a {
+.nav-links > a {
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: var(--transition);
-  position: relative;
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-primary);
-  transition: var(--transition);
-}
-
-.nav-links a:hover {
+.nav-links > a:hover {
   color: var(--text-primary);
 }
 
-.nav-links a:hover::after {
-  width: 100%;
+/* Dropdown */
+.nav-item-dropdown {
+  position: relative;
+}
+
+.nav-link-with-dropdown {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-link-with-dropdown:hover {
+  color: var(--text-primary);
+}
+
+.dropdown-arrow {
+  font-size: 0.6rem;
+  transition: var(--transition);
+}
+
+.nav-item-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  margin-top: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 240px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dropdown-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.dropdown-menu a:hover {
+  background: var(--gradient-subtle);
+  color: var(--text-primary);
 }
 
 .nav-cta {
@@ -860,6 +906,15 @@ body {
     font-size: 1.1rem;
     font-weight: 500;
     padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-dropdown-header {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
   }
 

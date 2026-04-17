@@ -77,6 +77,7 @@ function Reveal({ children, delay = 0 }) {
 function Navbar() {
   const { lang, setLang } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -88,14 +89,25 @@ function Navbar() {
   const nav = t('nav', lang);
   const safeNav = typeof nav === 'object' && nav ? nav : { logo: 'SherpaLabs|tech', about: 'About', mission: 'Mission', build: 'What We Build', values: 'Values', contact: 'Contact', cta: 'Get in Touch' };
 
-  const navLinks = [
-    { href: '#about', label: safeNav.about },
-    { href: '#mission', label: safeNav.mission },
-    { href: '#build', label: safeNav.build },
-    { href: '#ip', label: safeNav.ip || 'IP' },
-    { href: '#partners', label: safeNav.partners || 'Partners' },
-    { href: '#values', label: safeNav.values },
-    { href: '#contact', label: safeNav.contact },
+  // Dropdown menu structure
+  const navItems = [
+    {
+      label: 'Platform',
+      dropdown: [
+        { href: '#about', label: safeNav.about },
+        { href: '#mission', label: safeNav.mission },
+        { href: '#values', label: safeNav.values },
+      ]
+    },
+    {
+      label: 'Solutions',
+      dropdown: [
+        { href: '#build', label: safeNav.build },
+        { href: '#ip', label: safeNav.ip || 'IP & Licensing' },
+      ]
+    },
+    { label: 'Partners', href: '#partners' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -107,9 +119,31 @@ function Navbar() {
 
         {/* Desktop links */}
         <div className="nav-links">
-          {navLinks.map(l => (
-            <a key={l.href} href={l.href}>{l.label}</a>
+          {navItems.map((item, i) => (
+            item.dropdown ? (
+              <div 
+                key={i}
+                className="nav-item-dropdown"
+                onMouseEnter={() => setDropdownOpen(i)}
+                onMouseLeave={() => setDropdownOpen(null)}
+              >
+                <a href="#" className="nav-link-with-dropdown">
+                  {item.label}
+                  <span className="dropdown-arrow">▼</span>
+                </a>
+                {dropdownOpen === i && (
+                  <div className="dropdown-menu">
+                    {item.dropdown.map((link, j) => (
+                      <a key={j} href={link.href} onClick={() => setDropdownOpen(null)}>{link.label}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <a key={i} href={item.href}>{item.label}</a>
+            )
           ))}
+          
           <a href="#contact" className="nav-cta">{safeNav.cta}</a>
 
           {/* Lang switcher */}
@@ -139,8 +173,17 @@ function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="mobile-menu visible-scan">
-          {navLinks.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>{l.label}</a>
+          {navItems.map((item, i) => (
+            item.dropdown ? (
+              <div key={i}>
+                <div className="mobile-dropdown-header">{item.label}</div>
+                {item.dropdown.map((link, j) => (
+                  <a key={j} href={link.href} onClick={() => setMenuOpen(false)} style={{ paddingLeft: '20px' }}>{link.label}</a>
+                ))}
+              </div>
+            ) : (
+              <a key={i} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>
+            )
           ))}
           <div className="lang-switcher-mobile">
             {LANGUAGES.map(code => (
