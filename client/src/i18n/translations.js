@@ -108,6 +108,11 @@ export const translations = {
           tag: 'License',
         },
         {
+          title: 'SANDBOX I/O',
+          desc: 'Secure sandbox environment enabling safe access to external resources and visual content. MPAA-ready compliance for media handling.',
+          tag: 'License',
+        },
+        {
           title: 'Custom IP Development',
           desc: 'Commission bespoke technology solutions where you retain full ownership of the resulting intellectual property.',
           tag: 'Own',
@@ -297,6 +302,11 @@ export const translations = {
           tag: 'Licence',
         },
         {
+          title: 'SANDBOX I/O',
+          desc: 'Environnement sandbox sécurisé permettant un accès sûr aux ressources externes et au contenu visuel. Conformité MPAA ready pour la gestion des médias.',
+          tag: 'Licence',
+        },
+        {
           title: 'Développement de PI sur mesure',
           desc: 'Commandez des solutions technologiques sur mesure où vous conservez la pleine propriété de la propriété intellectuelle.',
           tag: 'Posséder',
@@ -483,6 +493,11 @@ export const translations = {
         {
           title: 'NextLEADgen',
           desc: 'Plataforma inteligente de geração e qualificação de leads usando análise preditiva e pontuação comportamental.',
+          tag: 'Licença',
+        },
+        {
+          title: 'SANDBOX I/O',
+          desc: 'Ambiente sandbox seguro permitindo acesso seguro a recursos externos e conteúdo visual. Conformidade MPAA ready para gerenciamento de mídia.',
           tag: 'Licença',
         },
         {
