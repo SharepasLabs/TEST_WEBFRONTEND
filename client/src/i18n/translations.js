@@ -117,16 +117,6 @@ export const translations = {
           desc: 'Virtual access platform for vibe-coded environments — immersive, AI-generated spaces for collaboration, experimentation, and creative exploration.',
           tag: 'License',
         },
-        {
-          title: 'Custom IP Development',
-          desc: 'Commission bespoke technology solutions where you retain full ownership of the resulting intellectual property.',
-          tag: 'Own',
-        },
-        {
-          title: 'Enterprise Solutions',
-          desc: 'Deploy our proven automation frameworks across your organization with dedicated support and custom integration.',
-          tag: 'Deploy',
-        },
       ],
     },
     build: {
@@ -316,16 +306,6 @@ export const translations = {
           desc: 'Plateforme d\'accès virtuel aux environnements vibe-coded — espaces immersifs générés par IA pour la collaboration, l\'expérimentation et l\'exploration créative.',
           tag: 'Licence',
         },
-        {
-          title: 'Développement de PI sur mesure',
-          desc: 'Commandez des solutions technologiques sur mesure où vous conservez la pleine propriété de la propriété intellectuelle.',
-          tag: 'Posséder',
-        },
-        {
-          title: 'Solutions d\'entreprise',
-          desc: 'Déployez nos cadres d\'automatisation éprouvés dans votre organisation avec un support dédié.',
-          tag: 'Déployer',
-        },
       ],
     },
     build: {
@@ -514,16 +494,6 @@ export const translations = {
           title: 'Vivarium',
           desc: 'Plataforma de acesso virtual a ambientes vibe-coded — espaços imersivos gerados por IA para colaboração, experimentação e exploração criativa.',
           tag: 'Licença',
-        },
-        {
-          title: 'Desenvolvimento de PI Sob Medida',
-          desc: 'Solicite soluções tecnológicas sob medida onde você retém toda a propriedade da propriedade intelectual resultante.',
-          tag: 'Possuir',
-        },
-        {
-          title: 'Soluções Empresariais',
-          desc: 'Implante nossos frameworks de automação comprovados em sua organização com suporte dedicado.',
-          tag: 'Implantar',
         },
       ],
     },
