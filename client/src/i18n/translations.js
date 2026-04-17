@@ -88,8 +88,23 @@ export const translations = {
       subtitle: 'We don\'t just build for clients. We build, license, and sell our own intellectual property.',
       cards: [
         {
-          title: 'Proprietary Stacks',
-          desc: 'Access our pre-built, production-grade AI infrastructure through flexible licensing agreements.',
+          title: 'GTM Advisory Agency',
+          desc: 'End-to-end go-to-market intelligence platform with multi-channel strategy automation and real-time market insights.',
+          tag: 'License',
+        },
+        {
+          title: 'Multi-Channel Content Generator',
+          desc: 'AI-powered content engine that generates, optimizes, and distributes content across all marketing channels simultaneously.',
+          tag: 'License',
+        },
+        {
+          title: 'FOB Post Sale',
+          desc: 'Automated post-sale engagement system that maximizes customer retention, upsell opportunities, and lifetime value.',
+          tag: 'License',
+        },
+        {
+          title: 'NextLEADgen',
+          desc: 'Intelligent lead generation and qualification platform using predictive analytics and behavioral scoring.',
           tag: 'License',
         },
         {
@@ -262,8 +277,23 @@ export const translations = {
       subtitle: 'Nous ne construisons pas seulement pour les clients. Nous construisons, licencions et vendons notre propre propriété intellectuelle.',
       cards: [
         {
-          title: 'Stacks propriétaires',
-          desc: 'Accédez à notre infrastructure IA pré-construite de qualité production via des accords de licence flexibles.',
+          title: 'GTM Advisory Agency',
+          desc: 'Plateforme d\'intelligence go-to-market de bout en bout avec automatisation de stratégie multicanal et insights marché en temps réel.',
+          tag: 'Licence',
+        },
+        {
+          title: 'Générateur de Contenu Multicanal',
+          desc: 'Moteur de contenu alimenté par l\'IA qui génère, optimise et distribue du contenu simultanément sur tous les canaux marketing.',
+          tag: 'Licence',
+        },
+        {
+          title: 'FOB Post-Vente',
+          desc: 'Système d\'engagement post-vente automatisé qui maximise la rétention client, les opportunités d\'upsell et la valeur à vie.',
+          tag: 'Licence',
+        },
+        {
+          title: 'NextLEADgen',
+          desc: 'Plateforme intelligente de génération et qualification de leads utilisant l\'analyse prédictive et le scoring comportemental.',
           tag: 'Licence',
         },
         {
@@ -436,8 +466,23 @@ export const translations = {
       subtitle: 'Não construímos apenas para clientes. Construímos, licenciamos e vendemos nossa própria propriedade intelectual.',
       cards: [
         {
-          title: 'Stacks Proprietários',
-          desc: 'Acesse nossa infraestrutura de IA pré-construída de qualidade de produção através de acordos de licenciamento flexíveis.',
+          title: 'GTM Advisory Agency',
+          desc: 'Plataforma de inteligência go-to-market de ponta a ponta com automação de estratégia multicanal e insights de mercado em tempo real.',
+          tag: 'Licença',
+        },
+        {
+          title: 'Gerador de Conteúdo Multicanal',
+          desc: 'Motor de conteúdo alimentado por IA que gera, otimiza e distribui conteúdo simultaneamente em todos os canais de marketing.',
+          tag: 'Licença',
+        },
+        {
+          title: 'FOB Pós-Venda',
+          desc: 'Sistema automatizado de engajamento pós-venda que maximiza a retenção de clientes, oportunidades de upsell e valor vitalício.',
+          tag: 'Licença',
+        },
+        {
+          title: 'NextLEADgen',
+          desc: 'Plataforma inteligente de geração e qualificação de leads usando análise preditiva e pontuação comportamental.',
           tag: 'Licença',
         },
         {
